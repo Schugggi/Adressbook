@@ -4,6 +4,11 @@ import { useState } from 'react';
 
 export default function AddressListPage(){
     const [contacts, setContacts] = useState([]);
+    
+    useEffect(() => {
+        setContacts(fetchContacts())
+      }, []);
+
     return(
         <div>
             <header>
@@ -11,7 +16,7 @@ export default function AddressListPage(){
             </header>
             <NavBar></NavBar>
             <div>
-                <AddressList></AddressList>
+                <AddressList contacts={contacts}></AddressList>
             </div>
         </div>
     );

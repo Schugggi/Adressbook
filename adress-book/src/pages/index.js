@@ -80,7 +80,7 @@ export default function Home() {
               value={email}
               setValue={setEmail}
               info="Any Description for your contact?"
-              required="*"
+              required=""
             />
             {/* Add Button */}
             <div className="flex justify-center">
