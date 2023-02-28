@@ -12,11 +12,29 @@ export default function Home() {
 
   function handleAddressEntry(){
     console.log("index.js: in handleAddressEntry")
-    if(name && number && email && description){
       console.log("index.js: in handleAddressEntry : after if statement")
       fetch(`/api/AddressHandler?name=${name}&number=${number}&email=${email}&description=${description}`)
-      .then((req) => req.json())
-    }
+      .then((res) => {
+        switch(res.status){
+          case 411:
+            alert("Name not Valid")
+            break
+          case 412:
+            alert("Number not Valid")
+            break
+          case 413:
+            alert("Email not Valid")
+            break
+          case 200:
+            setName("")
+            setNumber("")
+            setEmail("")
+            setDescription("")
+            break
+          default:
+            console.log(res.status)
+        }
+      })
   }
   if (status === "unauthenticated") {
     window.location.replace("api/auth/signin");

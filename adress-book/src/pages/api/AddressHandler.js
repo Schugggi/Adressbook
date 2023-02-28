@@ -10,12 +10,13 @@ export default function handler(req, res) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   console.log("----------------------------------------")
-  if(!name) return res.status(411).json({error: "Name not Valid"})
+  if(!name) return res.status(411).json({ error: "Name not valid" });
   console.log("Passed : Name")
-  if(!Number.isInteger(parseInt(number))) res.status(411).json({error: "Number is not Valid"})
+  if(!Number.isInteger(parseInt(number))) return res.status(412).json({ error: "Number not valid" });
   console.log("Passed : number")
-  if(!emailRegex.test(email)) res.status(411).json({error: "Email is not Valid"})
+  if(!emailRegex.test(email)) return res.status(413).json({ error: "Email not valid" });
   console.log("Passed : email")
+
 
   writeDBEntry(name, number, email, description)
   .then(async () => {
