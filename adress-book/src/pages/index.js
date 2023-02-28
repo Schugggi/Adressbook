@@ -1,6 +1,8 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSession } from 'next-auth/react'
+
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -8,11 +10,14 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
 
-
+  const { data: session, status } = useSession();
+  
   function handleLogin(){
-
+    console.log(status);
   }
-
+  if(status === "unauthenticated"){
+    window.location.replace("api/auth/signin");
+  }
   return (
     <>
       <Head>
@@ -20,6 +25,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1>Adressbuch</h1>
+        <h2>Hello {session?.user.name}</h2>
 
         <div>
           <p>Name</p>
