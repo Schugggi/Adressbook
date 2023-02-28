@@ -16,6 +16,7 @@ export default function handler(req, res) {
   console.log("Passed : number")
   if(!emailRegex.test(email)) return res.status(413).json({ error: "Email not valid" });
   console.log("Passed : email")
+  console.log("----------------------------------------")
 
 
   writeDBEntry(name, number, email, description)
