@@ -29,6 +29,7 @@ export default function Home() {
           alert("Email not Valid");
           break;
         case 200:
+          alert("Success!")
           setName("");
           setNumber("");
           setEmail("");
