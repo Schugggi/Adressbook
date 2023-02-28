@@ -19,7 +19,7 @@ export default function Home() {
         <title>Adressbuch</title>
       </Head>
       <main className={styles.main}>
-        <h1>Adressbuch Login</h1>
+        <h1>Adressbuch</h1>
 
         <div>
           <p>Name</p>
@@ -34,7 +34,7 @@ export default function Home() {
           <p>Beschreibung</p>
           <input value={description} onChange={(e) => setDescription(e.target.value)} />
 
-          <button onClick={handleLogin}>Login</button>
+          <button onClick={handleLogin}>Hinzufügen</button>
         </div>
       </main>
     </>
