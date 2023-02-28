@@ -1,3 +1,43 @@
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient()
+
 export default function handler(req, res) {
-  res.status(200).json({ name: 'John Doe' })
+  const {name, number, email, description} = req.query
+
+  console.log("data: ", name, number, email, description)
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  console.log("----------------------------------------")
+  if(!name) return res.status(411).json({error: "Name not Valid"})
+  console.log("Passed : Name")
+  if(!Number.isInteger(parseInt(number))) res.status(411).json({error: "Number is not Valid"})
+  console.log("Passed : number")
+  if(!emailRegex.test(email)) res.status(411).json({error: "Email is not Valid"})
+  console.log("Passed : email")
+
+  writeDBEntry(name, number, email, description)
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+  .catch(async (e) => {
+    console.error("Error in AddressHandler : Prisma Error: ", e)
+    await prisma.$disconnect()
+    process.exit(1)
+  })
+
+  res.status(200).json({message: "Success"})
+}
+
+
+async function writeDBEntry(name, number, email, description){
+  await prisma.contacts.create({
+    data: {
+      name: name,
+      number: parseInt(number),
+      email: email,
+      description: description
+    }
+  })
 }
