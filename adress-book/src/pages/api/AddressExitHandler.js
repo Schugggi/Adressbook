@@ -1,15 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from '../PrismaClient'
 
-const prisma = new PrismaClient()
-
-export default function handler(_, res){
-    const content = getData()
+export default async function handler(_, res){
+    const content = await prisma.contacts.findMany()
     console.log("AddressExitHandler : Data: ", content)
-    res.status(200).json({message: "hello"})
-}
-
-
-async function getData(){
-    const dBdata = await prisma.contacts.findMany()
-    return dBdata
+    res.status(200).json({data: content})
 }

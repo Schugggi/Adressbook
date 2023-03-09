@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient()
+import prisma from '../PrismaClient'
 
 export default function handler(req, res) {
   const {name, number, email, description} = req.query

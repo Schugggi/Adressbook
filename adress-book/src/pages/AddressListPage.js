@@ -1,20 +1,26 @@
 const { default: NavBar } = require("./components/NavBar");
 const { default: AddressList } = require("./components/AddressList");
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const { data: session, status } = useSession();
 
 export default function AddressListPage() {
+  const { data: session, status } = useSession();
   const [contacts, setContacts] = useState([]);
 
+  function fetchContacts() {
+    return fetch("/api/AddressExitHandler")
+      .then(res => res.json())
+      .catch(err => console.log(err))
+  };
+  
   useEffect(() => {
-    fetch(`/api/AddressExitHandler`);
+    fetchContacts()
+      .then(data => setContacts(data))
   }, []);
-
-  useEffect(() => {
-    setContacts(fetchContacts());
-  }, []);
+  
+  console.log(contacts)
+  
 
   if (status === "unauthenticated") {
     window.location.replace("api/auth/signin");
@@ -25,7 +31,7 @@ export default function AddressListPage() {
       <header></header>
       <NavBar></NavBar>
       <div>
-        <AddressList contacts={contacts}></AddressList>
+        <AddressList contacts={contacts.data}></AddressList>
       </div>
     </div>
   );
