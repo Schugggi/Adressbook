@@ -77,8 +77,8 @@ export default function Home() {
             />
             {/* Description Input */}
             <InfoInput
-              value={email}
-              setValue={setEmail}
+              value={description}
+              setValue={setDescription}
               info="Any Description for your contact?"
               required=""
             />
