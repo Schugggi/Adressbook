@@ -31,7 +31,7 @@ export default function AddressListPage() {
       <header></header>
       <NavBar></NavBar>
       <div>
-        <AddressList contacts={contacts.data}></AddressList>
+        <AddressList contacts={contacts.data} />
       </div>
     </div>
   );

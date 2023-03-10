@@ -16,7 +16,7 @@ export default function Home() {
     console.log("index.js: in handleAddressEntry");
     console.log("index.js: in handleAddressEntry : after if statement");
     fetch(
-      `/api/AddressHandler?name=${name}&number=${number}&email=${email}&description=${description}`
+      `/api/AddressEntryHandler?name=${name}&number=${number}&email=${email}&description=${description}`
     ).then((res) => {
       switch (res.status) {
         case 411:
